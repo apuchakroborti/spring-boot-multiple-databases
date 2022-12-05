@@ -1,4 +1,4 @@
-package com.apu.multiple.database.api.config;
+package com.apu.multiple.database.api.postgres.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +25,7 @@ import java.util.HashMap;
 @EnableJpaRepositories(entityManagerFactoryRef = "bookEntityManagerFactory",
 		transactionManagerRef = "bookTransactionManager",
 		basePackages = {
-		"com.apu.multiple.database.api.book.repository" })
+		"com.apu.multiple.database.api.postgres.repository" })
 public class BookPgDBConfig {
 	@Value("${spring.book.datasource.postgres.persistence.unit}")
 	public String persistenceUnitName;
@@ -75,7 +75,7 @@ public class BookPgDBConfig {
 //		em.setPersistenceUnitName("Book");
 
 		return builder.dataSource(dataSource).properties(properties)
-				.packages("com.apu.multiple.database.api.model.book").persistenceUnit("Book").build();
+				.packages("com.apu.multiple.database.api.postgres.entity").persistenceUnit("Book").build();
 
 //		return em;
 		/*HashMap<String, Object> properties = new HashMap<>();

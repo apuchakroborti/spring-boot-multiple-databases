@@ -1,4 +1,4 @@
-package com.apu.multiple.database.api.model.user;
+package com.apu.multiple.database.api.mysql.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

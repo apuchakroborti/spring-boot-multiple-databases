@@ -1,4 +1,4 @@
-package com.apu.multiple.database.api.config;
+package com.apu.multiple.database.api.mysql.config;
 
 import java.util.HashMap;
 
@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(entityManagerFactoryRef = "userEntityManagerFactory",
 		transactionManagerRef = "userTransactionManager",
 		basePackages = {
-		"com.apu.multiple.database.api.user.repository" })
+		"com.apu.multiple.database.api.mysql.repository" })
 public class UserDBConfig {
 	@Bean(name = "userDataSource")
 	@ConfigurationProperties(prefix = "spring.user.datasource")
@@ -38,7 +38,7 @@ public class UserDBConfig {
 		properties.put("hibernate.hbm2ddl.auto", "update");
 		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 		return builder.dataSource(dataSource).properties(properties)
-				.packages("com.apu.multiple.database.api.model.user").persistenceUnit("User").build();
+				.packages("com.apu.multiple.database.api.mysql.entity").persistenceUnit("User").build();
 	}
 
 	@Bean(name = "userTransactionManager")

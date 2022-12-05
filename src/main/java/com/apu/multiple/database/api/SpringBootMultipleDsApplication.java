@@ -6,10 +6,10 @@ import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
 
-import com.apu.multiple.database.api.book.repository.BookRepository;
-import com.apu.multiple.database.api.model.book.Book;
-import com.apu.multiple.database.api.model.user.User;
-import com.apu.multiple.database.api.user.repository.UserRepository;
+import com.apu.multiple.database.api.postgres.repository.BookRepository;
+import com.apu.multiple.database.api.postgres.entity.Book;
+import com.apu.multiple.database.api.mysql.entity.User;
+import com.apu.multiple.database.api.mysql.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -38,7 +38,7 @@ public class SpringBootMultipleDsApplication {
 				Stream.of(new Book(1, "Java"), new Book(2, "Math")).collect(Collectors.toList()));
 	}
 
-	@GetMapping("/getUsers")
+	/*@GetMapping("/getUsers")
 	public List<User> getUsers() {
 		return userRepository.findAll();
 	}
@@ -55,7 +55,7 @@ public class SpringBootMultipleDsApplication {
 	@PostMapping("/addBook")
 	public Book addBook(@RequestBody Book book){
 		return bookRepository.save(book);
-	}
+	}*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootMultipleDsApplication.class, args);

@@ -1,4 +1,4 @@
-package com.apu.multiple.database.api.model.book;
+package com.apu.multiple.database.api.postgres.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
