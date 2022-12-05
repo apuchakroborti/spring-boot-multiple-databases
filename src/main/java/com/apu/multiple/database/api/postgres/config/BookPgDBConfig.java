@@ -30,9 +30,6 @@ public class BookPgDBConfig {
 	@Value("${spring.book.datasource.postgres.persistence.unit}")
 	public String persistenceUnitName;
 
-	/*@Value("${spring.book.datasource.jpa.properties.hibernate.dialect}")
-	public String hibernateDialect;*/
-
 	@Value("${spring.book.datasource.jdbcUrl}")
 	private String dataSourceUrl;
 	@Value("${spring.book.datasource.username}")
@@ -40,16 +37,9 @@ public class BookPgDBConfig {
 	@Value("${spring.book.datasource.password}")
 	private String dataSourcePassword;
 
-	/*@Bean(name = "bookDataSource")
-	@ConfigurationProperties(prefix = "spring.book.datasource")
-	public DataSource dataSource() {
-		return DataSourceBuilder.create().build();
-	}*/
 	@Bean(name = "bookDataSource")
-//	@ConfigurationProperties(prefix = "spring.book.datasource")
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//		dataSource.setDriverClassName(hibernateDialect);
 		dataSource.setDriverClassName("org.hibernate.dialect.PostgreSQL9Dialect");
 		dataSource.setUrl(dataSourceUrl);
 		dataSource.setUsername(dataSourceUserName);
@@ -61,29 +51,16 @@ public class BookPgDBConfig {
 	@Bean(name = "bookEntityManagerFactory")
 	public LocalContainerEntityManagerFactoryBean bookEntityManagerFactory(EntityManagerFactoryBuilder builder,
 			@Qualifier("bookDataSource") DataSource dataSource) {
-//		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-//		em.setDataSource(dataSource);
-//		em.setPackagesToScan("com.javatechie.multiple.ds.api.model.book");
-//		em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		HashMap<String, Object> properties = new HashMap<>();
 		properties.put("hibernate.hbm2ddl.auto", "update");
-//		properties.put("hibernate.dialect", hibernateDialect);
 		properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
 		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
-//		em.setJpaPropertyMap(properties);
-//		em.setPersistenceUnitName(persistenceUnitName);
-//		em.setPersistenceUnitName("Book");
 
-		return builder.dataSource(dataSource).properties(properties)
-				.packages("com.apu.multiple.database.api.postgres.entity").persistenceUnit("Book").build();
-
-//		return em;
-		/*HashMap<String, Object> properties = new HashMap<>();
-//		properties.put("hibernate.hbm2ddl.auto", "update");
-//		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-		return builder.dataSource(dataSource).properties(properties)
-				.packages("com.javatechie.multiple.ds.api.model.book").persistenceUnit("Book").build();*/
+		return builder.dataSource(dataSource)
+				.properties(properties)
+				.packages("com.apu.multiple.database.api.postgres.entity")
+				.persistenceUnit("Book")
+				.build();
 	}
 
 	@Bean(name = "bookTransactionManager")
@@ -99,6 +76,9 @@ public class BookPgDBConfig {
 
 	@Bean
 	public EntityManagerFactoryBuilder entityManagerFactoryBuilder() {
-		return new EntityManagerFactoryBuilder(new HibernateJpaVendorAdapter(), new HashMap<>(), null);
+		return new EntityManagerFactoryBuilder(
+				new HibernateJpaVendorAdapter(),
+				new HashMap<>(),
+				null);
 	}
 }

@@ -6,6 +6,8 @@ import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
 
+import com.apu.multiple.database.api.h2.entity.Article;
+import com.apu.multiple.database.api.h2.repository.ArticleRepository;
 import com.apu.multiple.database.api.postgres.repository.BookRepository;
 import com.apu.multiple.database.api.postgres.entity.Book;
 import com.apu.multiple.database.api.mysql.entity.User;
@@ -28,6 +30,9 @@ public class SpringBootMultipleDsApplication {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private ArticleRepository articleRepository;
+
 	@PostConstruct
 	public void addData2DB() {
 		userRepository.saveAll(
@@ -36,6 +41,13 @@ public class SpringBootMultipleDsApplication {
 						new User(2, "Test2", "lm2")).collect(Collectors.toList()));
 		bookRepository.saveAll(
 				Stream.of(new Book(1, "Java"), new Book(2, "Math")).collect(Collectors.toList()));
+
+		articleRepository.saveAll(
+		Stream.of(
+				new Article(1, "test description"),
+				new Article(2, "test description2")
+		).collect(Collectors.toList())
+		);
 	}
 
 	/*@GetMapping("/getUsers")
