@@ -35,7 +35,7 @@ public class UserDBConfig {
 	public LocalContainerEntityManagerFactoryBean userEntityManagerFactory(EntityManagerFactoryBuilder builder,
 			@Qualifier("userDataSource") DataSource dataSource) {
 		HashMap<String, Object> properties = new HashMap<>();
-		properties.put("hibernate.hbm2ddl.auto", "update");
+//		properties.put("hibernate.hbm2ddl.auto", "update");
 		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 		return builder.dataSource(dataSource).properties(properties)
 				.packages("com.apu.multiple.database.api.mysql.entity").persistenceUnit("User").build();

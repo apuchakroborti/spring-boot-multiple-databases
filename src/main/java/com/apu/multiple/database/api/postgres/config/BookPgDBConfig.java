@@ -52,7 +52,7 @@ public class BookPgDBConfig {
 	public LocalContainerEntityManagerFactoryBean bookEntityManagerFactory(EntityManagerFactoryBuilder builder,
 			@Qualifier("bookDataSource") DataSource dataSource) {
 		HashMap<String, Object> properties = new HashMap<>();
-		properties.put("hibernate.hbm2ddl.auto", "update");
+//		properties.put("hibernate.hbm2ddl.auto", "update");
 		properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
 		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
 

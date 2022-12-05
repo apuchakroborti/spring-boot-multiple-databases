@@ -1,5 +1,6 @@
 package com.apu.multiple.database.api.h2.config;
 
+import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -51,7 +52,7 @@ public class H2DbConfig {
             EntityManagerFactoryBuilder builder,
             @Qualifier("hhDataSource") DataSource dataSource) {
         HashMap<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.hbm2ddl.auto", "update");
+//        properties.put("hibernate.hbm2ddl.auto", "update");
         properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
         properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         return builder.dataSource(dataSource)
