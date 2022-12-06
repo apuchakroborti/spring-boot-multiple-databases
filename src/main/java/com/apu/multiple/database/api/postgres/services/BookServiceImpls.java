@@ -1,9 +1,7 @@
 package com.apu.multiple.database.api.postgres.services;
 
-import com.apu.multiple.database.api.mysql.entity.User;
-import com.apu.multiple.database.api.mysql.util.UserUtils;
 import com.apu.multiple.database.api.postgres.dto.BookDto;
-import com.apu.multiple.database.api.postgres.entity.Book;
+import com.apu.multiple.database.api.postgres.models.Book;
 import com.apu.multiple.database.api.postgres.repository.BookRepository;
 import com.apu.multiple.database.api.postgres.util.BookUtils;
 import org.springframework.beans.factory.annotation.Autowired;

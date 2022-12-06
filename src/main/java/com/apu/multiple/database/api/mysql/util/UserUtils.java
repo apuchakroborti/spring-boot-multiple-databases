@@ -1,7 +1,7 @@
 package com.apu.multiple.database.api.mysql.util;
 
 import com.apu.multiple.database.api.mysql.dto.UserDto;
-import com.apu.multiple.database.api.mysql.entity.User;
+import com.apu.multiple.database.api.mysql.models.User;
 
 public class UserUtils {
     public static User dtoToEntityUser(UserDto userDto){

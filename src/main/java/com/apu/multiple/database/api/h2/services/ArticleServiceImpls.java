@@ -2,7 +2,7 @@ package com.apu.multiple.database.api.h2.services;
 
 
 import com.apu.multiple.database.api.h2.dto.ArticleDto;
-import com.apu.multiple.database.api.h2.entity.Article;
+import com.apu.multiple.database.api.h2.models.Article;
 import com.apu.multiple.database.api.h2.repository.ArticleRepository;
 import com.apu.multiple.database.api.h2.util.ArticleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,15 @@ import java.util.stream.Collectors;
 
 @Service
 public class ArticleServiceImpls implements ArticleService {
+//    @Autowired
+//    private ArticleRepository articleRepository;
+    private final ArticleRepository articleRepository;
+
     @Autowired
-    private ArticleRepository articleRepository;
+    ArticleServiceImpls(ArticleRepository articleRepository){
+        this.articleRepository = articleRepository;
+
+    }
 
     @Override
     public ArticleDto addArticle(ArticleDto articleDto) {

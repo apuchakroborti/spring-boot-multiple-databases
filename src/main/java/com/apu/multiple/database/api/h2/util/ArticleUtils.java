@@ -2,7 +2,7 @@ package com.apu.multiple.database.api.h2.util;
 
 
 import com.apu.multiple.database.api.h2.dto.ArticleDto;
-import com.apu.multiple.database.api.h2.entity.Article;
+import com.apu.multiple.database.api.h2.models.Article;
 
 public class ArticleUtils {
     public static Article dtoToEntityArticle(ArticleDto articleDto){

@@ -1,4 +1,4 @@
-package com.apu.multiple.database.api.mysql.entity;
+package com.apu.multiple.database.api.mysql.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

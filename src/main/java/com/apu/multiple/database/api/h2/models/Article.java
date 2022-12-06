@@ -1,4 +1,4 @@
-package com.apu.multiple.database.api.h2.entity;
+package com.apu.multiple.database.api.h2.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

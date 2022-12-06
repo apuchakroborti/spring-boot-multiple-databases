@@ -29,23 +29,28 @@ import java.util.HashMap;
 		basePackages = {
 		"com.apu.multiple.database.api.postgres.repository" })
 public class BookPgDBConfig {
-	@Value("${spring.book.datasource.postgres.persistence.unit}")
-	public String persistenceUnitName;
+//	@Value("${spring.book.datasource.postgres.persistence.unit}")
+//	public String persistenceUnitName;
 
-	@Value("${spring.book.datasource.jdbcUrl}")
-	private String dataSourceUrl;
-	@Value("${spring.book.datasource.username}")
-	private String dataSourceUserName;
-	@Value("${spring.book.datasource.password}")
-	private String dataSourcePassword;
+//	@Value("${spring.book.datasource.jdbcUrl}")
+//	@Value("${spring.book.datasource.ur}")
+//	private String dataSourceUrl;
+//	@Value("${spring.book.datasource.username}")
+//	private String dataSourceUserName;
+//	@Value("${spring.book.datasource.password}")
+//	private String dataSourcePassword;
 
 	@Bean(name = "bookDataSource")
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("org.hibernate.dialect.PostgreSQL9Dialect");
-		dataSource.setUrl(dataSourceUrl);
-		dataSource.setUsername(dataSourceUserName);
-		dataSource.setPassword(dataSourcePassword);
+//		dataSource.setDriverClassName("org.hibernate.dialect.PostgreSQL9Dialect");
+		dataSource.setDriverClassName("org.hibernate.dialect.PostgreSQLDialect");
+//		dataSource.setUrl(dataSourceUrl);
+//		dataSource.setUsername(dataSourceUserName);
+//		dataSource.setPassword(dataSourcePassword);
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/datasource2");
+		dataSource.setUsername("apu");
+		dataSource.setPassword("tigerit");
 
 		return dataSource;
 	}
@@ -56,8 +61,9 @@ public class BookPgDBConfig {
 		HashMap<String, Object> properties = new HashMap<>();
 //		properties.put("hibernate.hbm2ddl.auto", "update");
 		properties.put("hibernate.hbm2ddl.auto", "none");
-		properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
-		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
+//		properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
+//		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
+		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 
 		/*//working fine
 		Flyway userFlyway = new Flyway();
@@ -73,7 +79,7 @@ public class BookPgDBConfig {
 
 		return builder.dataSource(dataSource)
 				.properties(properties)
-				.packages("com.apu.multiple.database.api.postgres.entity")
+				.packages("com.apu.multiple.database.api.postgres.models")
 				.persistenceUnit("Book")
 				.build();
 	}
@@ -84,16 +90,16 @@ public class BookPgDBConfig {
 		return new JpaTransactionManager(bookEntityManagerFactory);
 	}
 
-	@Bean(value = "postgresqlJdbcTemplate")
+	/*@Bean(value = "postgresqlJdbcTemplate")
 	public JdbcTemplate jdbcTemplate(@Qualifier("bookDataSource") DataSource dataSource) {
 		return new JdbcTemplate(dataSource);
-	}
+	}*/
 
-	@Bean
+	/*@Bean
 	public EntityManagerFactoryBuilder entityManagerFactoryBuilder() {
 		return new EntityManagerFactoryBuilder(
 				new HibernateJpaVendorAdapter(),
 				new HashMap<>(),
 				null);
-	}
+	}*/
 }

@@ -1,0 +1,51 @@
+server:
+  servlet:
+  context-path: /service-api
+
+
+spring:
+  user:
+    datasource:
+      #MySQL
+      jdbcUrl: jdbc:mysql://localhost:3306/datasource1
+      username: apu
+      password: tigerit
+      driver-class-name: com.mysql.jdbc.Driver
+      #PG
+  book:
+    datasource:
+      jdbcUrl: jdbc:postgresql://localhost:5432/datasource2
+      username: apu
+      password: tigerit
+      postgres:
+        persistence:
+          unit: Book
+      jpa:
+        properties:
+          hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+  hh:
+    datasource:
+      url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+      driverClassName: org.h2.Driver
+      username: sa
+      password:
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    show-sql: true
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+
+  flyway:
+    enabled: false

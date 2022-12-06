@@ -74,7 +74,7 @@ public class UserDBConfig {
 
 		return builder.dataSource(dataSource)
 				.properties(properties)
-				.packages("com.apu.multiple.database.api.mysql.entity")
+				.packages("com.apu.multiple.database.api.mysql.models")
 				.persistenceUnit("User")
 				.build();
 	}
@@ -84,16 +84,16 @@ public class UserDBConfig {
 			@Qualifier("userEntityManagerFactory") EntityManagerFactory userEntityManagerFactory) {
 		return new JpaTransactionManager(userEntityManagerFactory);
 	}
-	@Bean(value = "mysqlJdbcTemplate")
+	/*@Bean(value = "mysqlJdbcTemplate")
 	public JdbcTemplate jdbcTemplate(@Qualifier("userDataSource") DataSource dataSource) {
 		return new JdbcTemplate(dataSource);
-	}
+	}*/
 
-	@Bean
+	/*@Bean
 	public EntityManagerFactoryBuilder entityManagerFactoryBuilder() {
 		return new EntityManagerFactoryBuilder(
 				new HibernateJpaVendorAdapter(),
 				new HashMap<>(),
 				null);
-	}
+	}*/
 }
