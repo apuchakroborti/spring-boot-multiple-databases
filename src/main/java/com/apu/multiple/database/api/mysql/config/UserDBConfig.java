@@ -2,9 +2,10 @@ package com.apu.multiple.database.api.mysql.config;
 
 import java.util.HashMap;
 
-import javax.persistence.EntityManagerFactory;
+//import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,12 +60,17 @@ public class UserDBConfig {
 		properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
 		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 
-		//working fine
+		/*//working fine
 		Flyway userFlyway = new Flyway();
         userFlyway.setDataSource(dataSource);
         userFlyway.setLocations("db/specific/mysql");
 //        flyway.setLocations("db/migration/mysql");
-        userFlyway.migrate();
+        userFlyway.migrate();*/
+		Flyway flyway = Flyway.configure()
+				.dataSource(dataSource)
+				.locations("db/specific/mysql")
+				.load();
+		flyway.migrate();
 
 		return builder.dataSource(dataSource)
 				.properties(properties)

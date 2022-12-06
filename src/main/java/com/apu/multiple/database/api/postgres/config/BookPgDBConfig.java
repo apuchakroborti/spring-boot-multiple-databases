@@ -1,5 +1,6 @@
 package com.apu.multiple.database.api.postgres.config;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +18,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
+//import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.HashMap;
 
@@ -58,11 +59,17 @@ public class BookPgDBConfig {
 		properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
 		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
 
-		//working fine
+		/*//working fine
 		Flyway userFlyway = new Flyway();
 		userFlyway.setDataSource(dataSource);
 		userFlyway.setLocations("db/specific/postgres");
-		userFlyway.migrate();
+		userFlyway.migrate();*/
+		//working fine
+		Flyway bookFlyway = Flyway.configure()
+				.dataSource(dataSource)
+				.locations("db/specific/postgres")
+				.load();
+		bookFlyway.migrate();
 
 		return builder.dataSource(dataSource)
 				.properties(properties)

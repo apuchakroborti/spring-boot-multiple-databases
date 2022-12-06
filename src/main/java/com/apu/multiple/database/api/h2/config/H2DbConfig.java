@@ -1,5 +1,6 @@
 package com.apu.multiple.database.api.h2.config;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +18,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
+//import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.HashMap;
 
@@ -57,10 +58,16 @@ public class H2DbConfig {
 //        properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
         properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 
-        //working fine
+        /*//working fine
         Flyway userFlyway = new Flyway();
         userFlyway.setDataSource(dataSource);
         userFlyway.setLocations("db/specific/h2");
+        userFlyway.migrate();*/
+        //working fine
+        Flyway userFlyway = Flyway.configure()
+                .dataSource(dataSource)
+                .locations("db/specific/h2")
+                .load();
         userFlyway.migrate();
 
         return builder.dataSource(dataSource)
