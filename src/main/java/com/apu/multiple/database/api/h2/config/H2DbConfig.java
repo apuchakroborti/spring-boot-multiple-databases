@@ -53,8 +53,16 @@ public class H2DbConfig {
             @Qualifier("hhDataSource") DataSource dataSource) {
         HashMap<String, Object> properties = new HashMap<>();
 //        properties.put("hibernate.hbm2ddl.auto", "update");
-        properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
+        properties.put("hibernate.hbm2ddl.auto", "none");
+//        properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
         properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+
+        //working fine
+        Flyway userFlyway = new Flyway();
+        userFlyway.setDataSource(dataSource);
+        userFlyway.setLocations("db/specific/h2");
+        userFlyway.migrate();
+
         return builder.dataSource(dataSource)
                 .properties(properties)
                 .packages("com.apu.multiple.database.api.h2.entity")

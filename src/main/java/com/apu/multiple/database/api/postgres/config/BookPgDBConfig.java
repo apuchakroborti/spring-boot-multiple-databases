@@ -1,5 +1,6 @@
 package com.apu.multiple.database.api.postgres.config;
 
+import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -53,8 +54,15 @@ public class BookPgDBConfig {
 			@Qualifier("bookDataSource") DataSource dataSource) {
 		HashMap<String, Object> properties = new HashMap<>();
 //		properties.put("hibernate.hbm2ddl.auto", "update");
+		properties.put("hibernate.hbm2ddl.auto", "none");
 		properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
 		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
+
+		//working fine
+		Flyway userFlyway = new Flyway();
+		userFlyway.setDataSource(dataSource);
+		userFlyway.setLocations("db/specific/postgres");
+		userFlyway.migrate();
 
 		return builder.dataSource(dataSource)
 				.properties(properties)
